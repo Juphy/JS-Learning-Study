@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload</title>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.0.0/dist/global/Rx.js"></script>
+    <style>
+        img {
+            width: 1200px;
+            height: 800px;
+            opacity: 0;
+        }
+
+        img.lazy_load {
+            opacity: 1;
+            transition: opacity 1s;
+        }
+
+        img[src=""], img:not([src]) {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<img lazyLoad
+     default-src="../../assets/images/loading.svg"
+     data-src="../../assets/images/background-attachment1.jpg">
+<img lazyLoad
+     data-src="../../assets/images/background-attachment2.jpg"
+     default-src="../../assets/images/loading.svg">
+<img lazyLoad
+     data-src="../../assets/images/background-attachment7.jpg">
+<img lazyLoad
+     data-src="../../assets/images/background-attachment4.jpg">
+<img lazyLoad
+     data-src="../../assets/images/background-attachment5.jpg"
+     default-src="../../assets/images/loading.svg">
+</body>
+</html>
+<script src="lazyload.js"></script>
+<script>
+    lazyLoad('../../assets/images/loading.svg');
+</script>
+<script src="节流与防抖.js"></script>

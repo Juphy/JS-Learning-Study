@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+</body>
+
+</html>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    ctx.translate(300, 300); // 设置中心点，此时300,300变成了坐标0,0
+    + ctx.save(); // 把转台保存起来
+
+    // 画大圆
+    ctx.beginPath();
+    ctx.arc(0, 0, 100, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+
+    // 画小圆
+    ctx.beginPath();
+    ctx.arc(0, 0, 10, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+    
+</script>

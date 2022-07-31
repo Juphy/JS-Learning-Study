@@ -1,0 +1,67 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "JavaScript之数据结构.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juphy/learn-study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juphy/learn-study/issues"
+  },
+  "homepage": "https://github.com/Juphy/learn-study#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "clipboard": "^2.0.1",
+    "decimal.js": "^10.0.1",
+    "delegate": "^3.2.0",
+    "echarts": "^4.1.0",
+    "express": "^4.16.3",
+    "express-formidable": "^1.0.0",
+    "express-generator": "^4.16.0",
+    "got": "^8.3.2",
+    "jquery": "^3.3.1",
+    "koa": "^2.6.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.0",
+    "koa-route": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.0",
+    "koa-session2": "^2.2.8",
+    "koa-static": "^5.0.0",
+    "lodash": "^4.17.11",
+    "mathjs": "^4.4.2",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.22.2",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
+    "node-fetch": "^2.6.0",
+    "printj": "^1.2.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "rxjs": "^6.6.2",
+    "sequelize": "^4.41.0",
+    "serve-index": "^1.9.1",
+    "superagent": "^3.8.3",
+    "typescript": "^4.6.2",
+    "underscore": "^1.9.1",
+    "websocket": "^1.0.28",
+    "ws": "^6.1.4",
+    "xlsx": "^0.13.5"
+  },
+  "devDependencies": {
+    "promises-aplus-tests": "^2.1.2",
+    "tape": "^5.0.1"
+  }
+}

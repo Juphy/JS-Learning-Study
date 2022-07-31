@@ -1,0 +1,87 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            display: flex;
+        }
+
+        .text {
+            width: 475px;
+            border: 1px solid aqua;
+            color: #333;
+            font-size: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn {
+            float: right;
+            clear: both;
+            margin-right: 8px;
+            color: dodgerblue;
+            cursor: pointer;
+        }
+
+        /**
+        虽然margin可以将按钮居下，但它无法实现文字环绕效果，这里就利用伪元素进行占位
+        */
+        .text::before {
+            content: '';
+            float: right;
+            height: 100%;
+            margin-bottom: -20px;
+        }
+
+        /**
+        高度塌陷calc(100%-20px)，由于包含块的高度没有显式指定，并且该元素不是绝对定位，则计算值伪auto，auto*100/100 = NaN
+        1.设置显式的高度值：这里高度是动态的，没办法显式指定，所以此方法不可用
+        2.如果包含块的高度显式指定，则设置该元素为绝对定位：包含块的高度时动态的，没办法显式指定，所以此方法也不可用
+        3.在元素外边包一层具有包裹性又具有定位特性的标签
+        */
+
+        #exp{
+            visibility: hidden;
+        }
+        #exp:checked+.text{
+            -webkit-line-clamp: 999; /*设置一个足够大的行数就可以了*/
+        }
+        .btn::after{
+            content: '展开'
+        }
+        #exp:checked+.text .btn::after{
+            content: '收起'
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <input type="checkbox" id="exp">
+        <div class="text">
+            <label class="btn" id="btn"></label>
+            <span>
+                但听得蹄声如雷，十余乘马疾风般卷上山来。马上乘客一色都是玄色薄毡大氅，
+                里面玄色布衣，但见人似虎，马如龙，人既矫捷，马亦雄骏，每一匹马都是高头
+                长腿，通体黑毛，奔到近处，群雄眼前一亮，金光闪闪，却见每匹马的蹄铁竟然
+                是黄金打就。来者一共是一十九骑，人数虽不甚多，气势之壮，却似有如千军万
+                马一般，前面一十八骑奔到近处，拉马向两旁一分，最后一骑从中驰出
+            </span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let btn = document.getElementById('btn'),
+        exp = document.getElementById('exp');
+    btn.addEventListener('click', function(e){
+        exp.checked = !exp.checked;
+    })
+</script>

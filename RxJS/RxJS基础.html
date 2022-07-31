@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.0.0/dist/global/Rx.js"></script>
+</head>
+<body>
+<button>点击</button>
+<input type="text">
+</body>
+</html>
+<script>
+    var btn = document.querySelector('button');
+    var observable = Rx.Observable.fromEvent(btn, 'click');
+    observable.subscribe(() => {
+        console.log('Clicked!');
+    });
+
+    // var count = 0;
+    // btn.addEventListener('click', () => {
+    //    console.log(`Click ${++count} times`)
+    // });
+
+    Rx.Observable.fromEvent(btn, 'click')
+        .scan(count => count + 1, 0)
+        .subscribe(count => {
+            console.log(`Click ${count} times`);
+        });
+
+    // var count = 0;
+    // var lastClick = Date.now();
+    // btn.addEventListener('click', () => {
+    //     if (Date.now() - lastClick >= 1000) {
+    //         console.log(`****Click ${++count} times`);
+    //         lastClick = Date.now();
+    //     }
+    // });
+
+    Rx.Observable.fromEvent(btn, 'click')
+        .throttleTime(1000)
+        .scan(count => count + 1, 0)
+        .subscribe(count => {
+            console.log(`****Click ${count} times`);
+        });
+
+    Rx.Observable.fromEvent(btn, 'click')
+        .throttleTime(1000)
+        .map(e => e.pageX)
+        .scan((count, pageX) => count + pageX, 0)
+        .subscribe(x => {
+            console.log(`···click ${x}`);
+        })
+</script>
+<script>
+    let $input = document.querySelector('input');
+    console.log($input);
+    Rx.Observable.fromEvent($input, 'keyup')
+        .map(e => {
+            console.log(e.taget.value);
+            return e.target.value;
+        })
+        .filter(text => {
+            console.log(text);
+            return text.length > 2;
+        })
+        .debounce(750)
+        .distinctUntilChanged();
+</script>
+<script>
+    Rx.Observable.fromEvent(document.querySelector('button'), 'click').subscribe(res => {
+        console.log('click', res);
+    })
+</script>
+<script>
+    var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
+    // input.filter(event => event.target.value.length > 2)
+    //     .map(event => event.target.value)
+    //     .subscribe(res => {
+    //         console.log(res);
+    //     });
+    //
+    // // 延迟触发
+    // input.delay(200)
+    //     .map(e => e.target.value)
+    //     .subscribe(val => console.log('delay', val));
+    //
+    // // 一段时间内只能通过一件事
+    // input.throttleTime(200)
+    //     .map(event => event.target.value)
+    //     .subscribe(val => {
+    //         console.log(val);
+    //     })
+    // // 直到其他observable触发事件才停止时间流
+    // let stopStream = Rx.Observable.fromEvent(document.querySelector('button'), 'click');
+    // input.takeUntil(stopStream)
+    //     .map(event => event.target.value)
+    //     .subscribe(value => console.log(value));
+    // // 在三次事件后停止事件流
+    input.take(3)
+        .map(event => event.target.value)
+        .subscribe(value => {
+            console.log('333333', value);
+        })
+    // // 停止输入后200ms方能通过最新的那个事件
+    // input.debounceTime(200)
+    //     .map(event => event.target.value)
+    //     .subscribe(val => {
+    //         console.log(val);
+    //     })
+</script>
+<script>
+    var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
+    // // 产生值
+    // // 输入“hello world”
+    //
+    // // 传递一个新的值
+    // input.map(event => event.target.value)
+    //     .subscribe(value => console.log(value));
+    //
+    // // 通过提取属性传递一个新的值
+    // input.pluck('target', 'value')
+    //     .subscribe(value => {
+    //         console.log(value);
+    //     });
+    //
+    // // 传递之前的两个值
+    // input.pluck('target', 'value').pairwise()
+    //     .subscribe(val => {
+    //         console.log(val);
+    //     });
+
+    // 只会通过唯一的值，每次只通过
+    input.pluck('data').distinct()
+        .subscribe(val => {
+            console.log(val);
+        });
+
+    // // 不会传递重复的值
+    // input.pluck('data').distinctUntilChanged()
+    //     .subscribe(val => {
+    //         console.log(val);
+    //     })
+</script>

@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input" type="text">
+    <div id="box"></div>
+    <script>
+        let input = document.querySelector('#input'),
+          box = document.querySelector('#box');
+        let data = { value: 1 };
+        Object.defineProperty(data, 'value', {
+            set: function(e){
+                input.value = e;
+                box.innerHTML = e;
+            },
+            get: function(){
+                return input.value
+            }
+        }) 
+        input.addEventListener('keyup', function(e){
+            console.log(e.target.value)
+            data.value = e.target.value
+        })
+        Object.keys(data).forEach(key => {
+            value = data[key];
+            data[key] = value;
+        })
+    </script>
+</body>
+</html>
